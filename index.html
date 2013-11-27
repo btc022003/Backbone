@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>book demo</title>
+</head>
+<body>
+    <input id="btn_add" type="button" value="Add">
+    <ul id="v_book_shelf">
+
+    </ul>
+    <script type="text/template" id="item-template">
+
+            <label><%= title %></label><a href="#">链接</a>
+
+    </script>
+</body>
+<script src="js/json2.js"></script>
+<script src="js/jquery.js"></script>
+<script src="js/underscore.js"></script>
+<script src="js/backbone.js"></script>
+<script>
+    $(function () {
+
+
+
+        Book = Backbone.Model.extend({
+            defaults: {
+                title: "hello world!"
+            },
+            initialize: function () {
+                this.bind("change",changedFun);
+            }
+        });
+
+        BookShelf = Backbone.Collection.extend({
+            model:Book,
+            initialize:function(){
+                this.bind("add",addFun);  ///////测试绑定add方法
+                this.bind("reset",resetFun); ////////测试绑定reset方法
+            }
+        });
+
+
+
+        var changedFun = function(model){
+            console.log('--changed--'+model.get('title'));
+        }
+
+
+        var book1 = new Book({title: 'book1'});
+
+        book1.set({"title":"book1_changed"});
+
+        var book2 = new Book({title: 'book2'});
+
+        var book3 = new Book({title: 'book3'});
+        var bookShelf = new BookShelf();
+
+        bookShelf.add(book1);
+
+        bookShelf.add(book2);
+
+        bookShelf.add(book3);
+
+        bookShelf.remove(book3);
+
+        bookShelf.each(function (book) {
+            //console.log(book.get('title'));
+        });
+
+        bookShelf.fetch({
+            url: "http://localhost:8065/api/api.php?action=getbook",
+            success: function (collection, response) {
+                if (response.status == "y") {
+                    collection.reset();
+                    console.log("----------------reset---------------------");
+                    var result  = response.inf;
+                    _.each(result,function(item){
+                        console.log(item.title);
+                        bookShelf.add(item);
+                    });
+                    console.log("-------------------");
+                    for(var i=0;i<result.length;i++)
+                    {
+                        var item = result[i];
+                        console.log(item.title);
+                    }
+                    collection.each(function(book){
+                        console.log(book.get('title'));
+                    });
+
+                    bookShelf.reset(result);
+
+                    //$("#v_book_shelf").append(bookShelfView.render().el);
+                }
+
+            },
+            error: function (err) {
+                console.log("err");
+            }
+        });
+
+
+        BookShelfView = Backbone.View.extend({
+            tagName:"li",
+            template: _.template($('#item-template').html()),
+            initialize: function() {
+                //this.render();
+            },
+            events:{
+                'click a':function(){
+                    alert(this.model.get('title'));
+                },
+                'dblclick label':'dbclickFun'
+            },
+            render: function() {
+                this.$el.html(this.template(this.model.toJSON()));
+                return this;
+            },
+            dbclickFun:function(){
+                alert(this.model.get('title'));
+            }
+        });
+
+
+
+
+        /*******
+         * 应用程序view
+         * @type {*|void}
+         */
+        AppView = Backbone.View.extend({
+            el:"",
+            initialize:function(){
+                this.listenTo(bookShelf, 'reset', this.addAll);
+                this.listenTo(bookShelf, 'add', this.addOne);
+            },
+            addOne:function(book){
+                rendFun(book);
+            },
+            addAll:function(){
+                bookShelf.each(function(book){
+                    rendFun(book);
+                });
+            }
+        });
+
+        /******
+         * 调用渲染li
+         * @param book
+         */
+        rendFun = function(book)
+        {
+            var view = new BookShelfView({model: book});
+            $("#v_book_shelf").append(view.render().el);
+        }
+
+        $("#btn_add").bind("click",function(){
+            bookShelf.add(book1);
+            bookShelf.add(book2 );
+            //bookShelf.addOne(book1);
+           // rendFun(book1);
+        });
+
+        var App = new AppView; /////view入口
+
+
+    });
+
+    function addFun(book)
+    {
+        console.log("----"+book.get('title'));
+    }
+
+    function resetFun(bookShelf)
+    {
+        console.log("---------reset start----------");
+        bookShelf.each(function(book){
+            console.log(book.get('title'));
+        });
+        console.log("---------reset end----------");
+
+        var sortedByAlphabet = bookShelf.sortBy(function (book) {
+            return book.get("title").toLowerCase();
+        });
+
+        console.log("- Now sorted: ");
+
+        sortedByAlphabet.forEach(function(model){
+            console.log(model.get('title'));
+        });
+    }
+
+
+
+
+</script>
+</html>
