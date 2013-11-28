@@ -8,4 +8,8 @@ api:php服务页面
 js:基础js类库
 javascripts:程序相关的js
 
+2013-11-28
+测试使用django rest framework实现api接口
+数据库使用sqlite
+
 

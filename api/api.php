@@ -1,8 +1,8 @@
 <?php
 
-    $action = $_GET["action"];
+    $action = $_GET["action"]; /////////获取action url传参
 
-    $name = $_POST["name"];
+    $name = $_POST["name"]; //////////获取参数 form传参
 
     if($name)
     {
