@@ -15,6 +15,10 @@ javascripts:程序相关的js
 测试使用django rest framework实现api接口
 数据库使用sqlite
 
+2013-11-29
+ requirejs 这个还需要再优化  还有view model分离的事情
+ 更新的功能实现在/templates/hello_view.html文件中
+
 
 ---------------------python部分-----------------------------------------
 
@@ -65,6 +69,8 @@ javascripts:程序相关的js
     setting.py文件
         加载静待js或者css样式时注意修改
             STATIC_URL STATICFILES_DIRS 节点
+
+    提供backbone调用参数的api,返回序列化的数据
 
 
 

@@ -1,5 +1,7 @@
 /**
  * Created by Administrator on 13-11-18.
+ *
+ * requirejs 这个还需要再优化  还有view model分离的事情
  */
 require.config({
     paths:{
@@ -57,7 +59,7 @@ require(['json2', 'jquery', 'underscore', 'backbone'],
         ///////实例化
         var tem_new = new news();
         tem_new.fetch({
-            url:"/get_data/177",
+            url:"/get_data/177",  ////////调用接口获取数据
             success:function(item,response){
                 console.log(response.title);
                 var view = new newsView({model:item});
