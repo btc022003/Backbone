@@ -15,6 +15,14 @@
     <p>Hello {{ name }} !</p>
     <p>It's {{ time }} now!</p>
    {% include "controls/foot.html" %}
+
+    <script type="text/template" id="item_template">
+       <div>
+            <p><%= title %></p>
+            <p><%= code %></p>
+        </div>
+    </script>
+
 </body>
 <script src="/static/js/require.js" data-main="/static/javascripts/main" type="text/javascript"></script>
 </html>
