@@ -7,7 +7,6 @@ backbone学习记录
 
 2013-11-27 
 目录说明
-api:php服务页面
 js:基础js类库
 javascripts:程序相关的js
 
@@ -28,10 +27,11 @@ javascripts:程序相关的js
              a.DjangoRest django的core目录
              b.RootApi    app目录
              c.templates  模板文件
+             d.static    资源文件js css img等
     配置文件 DjangoRest/settings.py
-            DATABASES 数据库配置节点
-            TIME_ZONE 时区
-            INSTALLED_APPS 添加自己的app名字
+             DATABASES 数据库配置节点
+             TIME_ZONE 时区
+             INSTALLED_APPS 添加自己的app名字
     urls路由  DjangoRest/urls.py
             正则表达式方式的配置方法,注意引入自己的view.py
 
@@ -48,6 +48,8 @@ javascripts:程序相关的js
         hello
 
         get_one
+
+        get_one_data    ##########返回json数据
 
         get_all
 
