@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <form action="/put/" method="post">
+        {% csrf_token %}
+        <input type="text" name="title" placeholder="title">
+        <input type="text" name="code" placeholder="code">
+        <input type="submit" value="put">
+    </form>
+
+
+    <p>Hello {{ name }} !</p>
+    <p>It's {{ time }} now!</p>
+   {% include "controls/foot.html" %}
+</body>
+</html>
