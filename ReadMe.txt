@@ -62,6 +62,9 @@ javascripts:程序相关的js
             b.在*.html文件中 在form标签中加入 {% csrf_token %}
 
 
+    setting.py文件
+        加载静待js或者css样式时注意修改
+            STATIC_URL STATICFILES_DIRS 节点
 
 
 

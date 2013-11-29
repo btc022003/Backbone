@@ -30,6 +30,18 @@ def get_one(request, nid):
     #html = "<p>It's now {time}.I'm {name}</p>".format(time=now,name=obj.title)
     return render_to_response('hello_view.html', {'name': obj.title, "time": now},context_instance=RequestContext(request))
 
+'''
+@nid 新闻id
+根据id获取单条记录数据
+'''
+def get_one_data(requets,nid):
+    if(requets.method == "GET"):
+        obj = Wnewsinfo.objects.get(nid=nid)
+        serializer = WnewsSerializer(obj)
+        #return HttpResponse(simplejson.dumps(serializer.data, ensure_ascii=False))
+        return JSONResponse(serializer.data)
+    else:
+        return JSONResponse("参数错误")
 
 '''
 获取全部列表数据 绑定到页面中
