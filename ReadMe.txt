@@ -19,6 +19,8 @@ javascripts:程序相关的js
  更新的功能实现在/templates/hello_view.html文件中
 
 
+
+
 ---------------------python部分-----------------------------------------
 
 1.start
@@ -73,6 +75,13 @@ javascripts:程序相关的js
             STATIC_URL STATICFILES_DIRS 节点
 
     提供backbone调用参数的api,返回序列化的数据
+
+4.update-3
+    尝试扩展models.Wnewsinfo 失败
+    目的是把自动生成的代码和自己写的代码分离
+
+    2013-11-30
+
 
 
 

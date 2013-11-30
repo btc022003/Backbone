@@ -60,5 +60,9 @@ class Wnewsinfo(models.Model):
     extendtxt2 = models.TextField(db_column=u'ExtendTxt2', blank=True) # Field name made lowercase. This field type is a guess.
     extendtxt3 = models.TextField(db_column=u'ExtendTxt3', blank=True) # Field name made lowercase. This field type is a guess.
     extendtxt4 = models.TextField(db_column=u'ExtendTxt4', blank=True) # Field name made lowercase. This field type is a guess.
+
     class Meta:
         db_table = u'WNewsInfo'
+
+
+
