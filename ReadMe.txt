@@ -21,6 +21,9 @@ javascripts:程序相关的js
 
 2013-12-03
  把js文件分拆在不同目录
+ app.js js入口文件 list_item_view.html是主页面
+
+ 问题：这样把js文件分成一个个小文件 会很多 有没有更好的解决办法
 
 
 

@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 
-from RootApi.views import hello,get_one,get_all,get_all_data,test_put,get_one_data
+from RootApi.views import hello,get_one,get_all,get_all_data,test_put,get_one_data,index
 
 from django.contrib import admin
 
@@ -17,6 +17,7 @@ urlpatterns = patterns('',
                        (r'^admin/', include(admin.site.urls)),
                        (r'^all_data/$', get_all_data),
                        (r'^put/$', test_put),
+                       (r'^index/$', index),
     # Examples:
     # url(r'^$', 'DjangoRest.views.home', name='home'),
     # url(r'^DjangoRest/', include('DjangoRest.foo.urls')),

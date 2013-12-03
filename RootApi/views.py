@@ -87,6 +87,8 @@ def test_put(request):
     else:
         return JSONResponse("参数错误")
 
+def index(request):
+    return render_to_response('list_item_view.html')
 
 
 class JSONResponse(HttpResponse):
