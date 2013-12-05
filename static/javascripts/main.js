@@ -33,7 +33,7 @@ require(['json2', 'jquery', 'underscore', 'backbone', "news","newsCollection"],
                 'dblclick p': 'dbclickFun' ///////////监听双击事件
             },
             render: function() {
-                this.$el.html(this.template(this.model.toJSON()));
+                this.$el.html(this.template(this.model));
                 return this;
             },
             dbclickFun: function(e) {
@@ -48,11 +48,15 @@ require(['json2', 'jquery', 'underscore', 'backbone', "news","newsCollection"],
         tem_new.fetch({
             url: "/get_data/177", ////////调用接口获取数据
             success: function(item, response) {
-                console.log(response.title);
-                var view = new newsView({
-                    model: item
-                });
-                $("body").append(view.render().el);
+                if(response.status=="y")
+                {
+                    console.log(response.info.title);
+                    var view = new newsView({
+                        model: response.info
+                    });
+                    $("body").append(view.render().el);
+                }
+
             }
         });
     });

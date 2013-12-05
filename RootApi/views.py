@@ -39,7 +39,9 @@ def get_one_data(requets,nid):
         obj = Wnewsinfo.objects.get(nid=nid)
         serializer = WnewsSerializer(obj)
         #return HttpResponse(simplejson.dumps(serializer.data, ensure_ascii=False))
-        return JSONResponse(serializer.data)
+        result = {"status":"y","info":serializer.data,"msg":"ok"}  #在输出结果中添加标签
+        #return JSONResponse(serializer.data)
+        return JSONResponse(result)
     else:
         return JSONResponse("参数错误")
 
@@ -59,7 +61,9 @@ def get_all_data(request):
 
     serializer = WnewsSerializer(obj)
     #return HttpResponse(simplejson.dumps(serializer.data, ensure_ascii=False))
-    return JSONResponse(serializer.data)
+    result = {"status":"y","info":serializer.data,"msg":"ok"} #在输出结果中添加标签
+    #return JSONResponse(serializer.data)
+    return JSONResponse(result)
 
 
 
@@ -83,9 +87,26 @@ def test_put(request):
     if(request.method == "POST"):
         data = FormParser().parse(request)
         serializer = WnewsSerializer(data=data)
-        return JSONResponse(serializer.data)
+        result = {"status":"y","info":data,"msg":"ok"} #在输出结果中添加标签
+        return JSONResponse(result)
     else:
-        return JSONResponse("参数错误")
+        return JSONResponse({"status":"n","info":"参数错误","msg":"ok"})
+
+
+def update(request):
+    fileHandle = open('random.txt', 'w')
+    fileHandle.write("init")
+    if(request.method == "POST"):
+        data = FormParser().parse(request)
+        fileHandle.write(data)
+        fileHandle.close()
+        serializer = WnewsSerializer(data=data)
+        result = {"status":"y","info":serializer.data,"msg":"ok"} #在输出结果中添加标签
+        return JSONResponse(result)
+    else:
+        fileHandle.write("get")
+        return JSONResponse({"status":"n","info":"参数错误","msg":"ok"})
+
 
 def index(request):
     return render_to_response('list_item_view.html')

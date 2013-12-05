@@ -37,8 +37,16 @@
 
         </div>
     </div>
+    <div id="divEditor">
+
+    </div>
     <script type="text/template" id="item_template">
         <a href="###"><%= title %>[<%= code %>]</a>
+        <input type="button" value="修改" class="btn"/>
+    </script>
+    <script type="text/template" id="item_editor">
+        Title:<input type="text" class="title" value="<%=title %>"/>
+        <input type="button" value="确认" class="btn"/>
     </script>
 </div>
 </body>
